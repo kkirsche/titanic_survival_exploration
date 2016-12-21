@@ -30,3 +30,47 @@ def predictions_one_feature(data):
         else:
             predictions.append(0)
     return predictions
+
+
+def predictions_two_features(data):
+    """Model with one feature:
+           - Predict a passenger survived if they are female.
+           - Predict a passenger survived if they are male and younger than 10 years old."""
+
+    predictions = []
+    for _, passenger in data.iterrows():
+        if passenger['Sex'] == 'female':
+            predictions.append(1)
+        else:
+            # Passenger is a male
+            if passenger['Age'] < 10:
+                predictions.append(1)
+            else:
+                predictions.append(0)
+    return predictions
+
+
+def predictions_multi_features(data):
+    """Model with one feature:
+           - Predict a passenger survived if they are female.
+           - Predict a passenger survived if they are male and younger than 10 years old.
+           - Predict a passenger survived if they were a first class or second class child"""
+
+    predictions = []
+    for _, passenger in data.iterrows():
+        if passenger['Sex'] == 'female':
+            if passenger['Pclass'] > 2:
+                predictions.append(0)
+            else:
+                predictions.append(1)
+        else:
+            # Passenger is a male
+            if passenger['Pclass'] == 3:
+                predictions.append(0)
+                continue
+
+            if passenger['Age'] < 10:
+                predictions.append(1)
+            else:
+                predictions.append(0)
+    return predictions
