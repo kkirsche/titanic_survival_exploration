@@ -8,6 +8,7 @@ import numpy
 import titanic_visualizations
 from IPython.display import display
 from accuracy import accuracy_score
+from predictions import predictions_no_features, predictions_one_feature
 
 # Load the dataset
 in_file = 'titanic_data.csv'
@@ -26,3 +27,9 @@ display(data.head())
 # Test the accuracy score against our predictions
 predictions = pandas.Series(numpy.ones(5, dtype=int))
 print(accuracy_score(outcomes[:5], predictions))
+
+predictions = predictions_no_features(data)
+print(accuracy_score(outcomes[:], predictions))
+
+predictions = predictions_one_feature(data)
+print(accuracy_score(outcomes[:], predictions))
