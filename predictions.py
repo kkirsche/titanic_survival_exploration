@@ -65,12 +65,15 @@ def predictions_multi_features(data):
                 predictions.append(1)
         else:
             # Passenger is a male
-            if passenger['Pclass'] == 3:
+            if passenger['Pclass'] == 3 or passenger['Parch'] == 0:
                 predictions.append(0)
                 continue
 
             if passenger['Age'] < 10:
                 predictions.append(1)
             else:
-                predictions.append(0)
+                if passenger['Fare'] > 300:
+                    predictions.append(1)
+                else:
+                    predictions.append(0)
     return predictions
